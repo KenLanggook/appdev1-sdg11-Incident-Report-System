@@ -15,7 +15,7 @@ MARK LLOYD YADAO
 KEN LANGGOOK
 
 Developer: Mark Lloyd Yadao (20236590@s.ubaguio.edu)
-Last updated: April 16, 2026
+Last updated: April 20, 2026
 
 📌 Features
 Add and manage commission requests
@@ -36,7 +36,7 @@ Delete completed or cancelled requests
 Follow these steps to run the project locally:
 
 1. Clone the repository
-git clone https://github.com/your-username/artist-commission-queue.git
+git clone https://github.com/KenLanggook/appdev1-sdg8-artComQue.git
 2. Navigate to the project folder
 cd artist-commission-queue
 3. Install dependencies
