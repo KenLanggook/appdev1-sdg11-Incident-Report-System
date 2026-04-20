@@ -3,10 +3,7 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  background-image: linear-gradient(rgba(74, 74, 74, 0.8), rgba(44, 44, 44, 0.9)), url('/university-bg.jpg');
-  background-size: cover;
-  background-position: center;
-  background-repeat: no-repeat;
+  background: linear-gradient(135deg, #4a4a4a, #2c2c2c);
   padding: 20px;
 }
 

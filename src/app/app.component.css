@@ -5,7 +5,7 @@
 }
 
 .main-nav {
-  background-image: linear-gradient(rgba(74, 74, 74, 0.85), rgba(44, 44, 44, 0.9)), url('assets/university-bg.jpg');
+  background-image: linear-gradient(rgba(74, 74, 74, 0.85), rgba(44, 44, 44, 0.9)), url('/university-bg.jpg');
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
