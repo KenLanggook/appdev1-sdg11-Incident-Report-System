@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Router, RouterOutlet } from '@angular/router';
+import { Router, RouterOutlet, RouterLink, RouterLinkActive } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { AuthService } from './services/auth.service';
 
@@ -8,7 +8,7 @@ import { AuthService } from './services/auth.service';
   standalone: true,
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css'],
-  imports: [CommonModule, RouterOutlet]
+  imports: [CommonModule, RouterOutlet, RouterLink, RouterLinkActive]
 })
 export class AppComponent implements OnInit {
   currentUser: any = null;

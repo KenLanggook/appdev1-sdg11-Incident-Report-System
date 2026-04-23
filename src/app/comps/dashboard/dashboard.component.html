@@ -2,7 +2,7 @@
   <div class="dashboard-header">
     <div class="header-content">
       <div class="user-info">
-        <h1>Welcome, {{ currentUser.profile.firstName }}!</h1>
+        <h1>Welcome, {{ currentUser.profile.firstName | titlecase }}!</h1>
         <p>{{ currentUser.role === UserRole.ADMIN ? 'Administrator' : currentUser.role === UserRole.SECURITY ? 'Security Officer' : 'Student' }}</p>
       </div>
       <div class="header-actions">

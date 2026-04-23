@@ -1,19 +1,67 @@
 .login-container {
   min-height: 100vh;
+  position: relative;
+}
+
+.video-section {
+  position: relative;
+  height: 100vh;
+  width: 100%;
+  overflow: hidden;
+}
+
+.top-video {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  background: #000;
+}
+
+.video-overlay {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  text-align: center;
+  color: white;
+  z-index: 2;
+}
+
+.video-overlay h1 {
+  font-size: 3rem;
+  font-weight: bold;
+  margin: 0 0 1rem 0;
+  text-shadow: 2px 2px 4px rgba(0,0,0,0.7);
+}
+
+.video-overlay p {
+  font-size: 1.5rem;
+  margin: 0;
+  text-shadow: 2px 2px 4px rgba(0,0,0,0.7);
+}
+
+.login-section {
+  min-height: 100vh;
   display: flex;
   align-items: center;
   justify-content: center;
-  background: linear-gradient(135deg, #4a4a4a, #2c2c2c);
+  background: linear-gradient(135deg, #f8f9fa, #e9ecef);
   padding: 20px;
 }
 
+.login-overlay {
+  width: 100%;
+  max-width: 400px;
+}
+
 .login-card {
-  background: white;
+  background: rgba(255, 255, 255, 0.95);
   border-radius: 12px;
-  box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+  box-shadow: 0 10px 30px rgba(0,0,0,0.3);
   overflow: hidden;
   width: 100%;
   max-width: 400px;
+  backdrop-filter: blur(10px);
 }
 
 .login-header {
