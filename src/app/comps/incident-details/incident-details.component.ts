@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { ActivatedRoute, Router } from '@angular/router';
 import { IncidentService } from '../../services/incident.service';
 import { AuthService } from '../../services/auth.service';
+import { PdfService } from '../../services/pdf.service';
 import { Incident, IncidentStatus, IncidentSeverity } from '../../models/incident.model';
 
 @Component({
@@ -23,7 +24,8 @@ export class IncidentDetailsComponent implements OnInit {
     private route: ActivatedRoute,
     private router: Router,
     private incidentService: IncidentService,
-    private authService: AuthService
+    private authService: AuthService,
+    private pdfService: PdfService
   ) {}
 
   ngOnInit() {
@@ -99,6 +101,29 @@ export class IncidentDetailsComponent implements OnInit {
   editIncident() {
     // Navigate to edit incident page (to be implemented)
     console.log('Edit incident functionality to be implemented');
+  }
+
+  printIncident() {
+    if (this.incident) {
+      this.pdfService.generateIncidentPDF(this.incident);
+    }
+  }
+
+  downloadIncidentPDF() {
+    console.log('PDF download button clicked');
+    if (this.incident) {
+      console.log('Incident data available:', this.incident.id);
+      this.pdfService.downloadIncidentPDF(this.incident);
+    } else {
+      console.error('No incident data available');
+      alert('No incident data available. Please try again.');
+    }
+  }
+
+  shareIncidentReport() {
+    if (this.incident) {
+      this.pdfService.shareIncidentReport(this.incident);
+    }
   }
 
   getTimeElapsed(reportDate: Date): string {
