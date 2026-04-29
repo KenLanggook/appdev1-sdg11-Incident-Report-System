@@ -1,13 +1,13 @@
-# appdev1-sdg8-artComQue
-A web-based system for managing and tracking art commissions. This application helps artists organize client requests, monitor progress, and maintain a clear and structured commission queue.
+# appdev1-sdg11-Incident-Report-System
+A web-based system for managing and tracking incident reports. This application helps communities document urban issues, monitor resolution progress, and maintain a clear and structured reporting system for sustainable cities and communities.
 
 🌍 Sustainable Development Goal (SDG)
 
 This project supports:
 
-SDG 8 – Decent Work and Economic Growth
+SDG 11 – Sustainable Cities and Communities
 
-It helps freelance artists manage their commissions efficiently, promoting productivity, organization, and better client management—contributing to sustainable income opportunities.
+It helps communities report and track urban incidents efficiently, promoting safer, more inclusive, and sustainable urban environments through better incident management and resolution tracking.
 
 👥 Group Members
 YSMAEL PASION  
@@ -15,14 +15,14 @@ MARK LLOYD YADAO
 KEN LANGGOOK
 
 Developer: Mark Lloyd Yadao (20236590@s.ubaguio.edu)
-Last updated: April 20, 2026
+Last updated: April 30, 2026
 
 📌 Features
-Add and manage commission requests
-Track status (Pending, In Progress, Completed)
-Organized queue system
-Edit and update commission details
-Delete completed or cancelled requests
+Add and manage incident reports
+Track status (Pending, In Progress, Resolved)
+Organized reporting system
+Edit and update incident details
+Delete resolved or cancelled reports
 
 ## Technologies Used
 - **Frontend**: Angular 19
@@ -36,9 +36,9 @@ Delete completed or cancelled requests
 Follow these steps to run the project locally:
 
 1. Clone the repository
-git clone https://github.com/KenLanggook/appdev1-sdg8-artComQue.git
+git clone https://github.com/KenLanggook/appdev1-sdg11-Incident-Report-System.git
 2. Navigate to the project folder
-cd artist-commission-queue
+cd appdev1-sdg11-Incident-Report-System
 3. Install dependencies
 npm install
 4. Run the Angular development server
