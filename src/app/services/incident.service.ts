@@ -122,23 +122,14 @@ export class IncidentService {
     return this.http.get<Incident>(`${this.apiUrl}/${id}`);
   }
 
-  createIncident(incidentData: Omit<Incident, 'id' | 'reportedAt' | 'updatedAt'>): Observable<Incident | null> {
+  createIncident(incidentData: Omit<Incident, 'id' | 'reportedAt' | 'updatedAt'>): Observable<Incident> {
     // Validate that the incident is within University of Baguio campus boundaries
     if (!this.isWithinCampusBounds(incidentData.location.latitude, incidentData.location.longitude)) {
       console.error('Incident location is outside University of Baguio campus boundaries');
-      return of(null);
+      throw new Error('Incident location is outside University of Baguio campus boundaries');
     }
 
-    const newIncident: Incident = {
-      ...incidentData,
-      id: (this.incidents.length + 1).toString(),
-      reportedAt: new Date(),
-      updatedAt: new Date()
-    };
-
-    this.incidents.push(newIncident);
-    this.incidentsSubject.next(this.incidents);
-    return of(newIncident);
+    return this.http.post<Incident>(this.apiUrl, incidentData);
   }
 
   private isWithinCampusBounds(latitude: number, longitude: number): boolean {
