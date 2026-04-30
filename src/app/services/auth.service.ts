@@ -1,4 +1,5 @@
 import { Injectable } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
 import { BehaviorSubject, Observable, of } from 'rxjs';
 import { User, UserRole } from '../models/incident.model';
 
@@ -9,8 +10,9 @@ export class AuthService {
   private currentUserSubject = new BehaviorSubject<User | null>(null);
   private isAuthenticatedSubject = new BehaviorSubject<boolean>(false);
   private users: User[] = [];
+  private apiUrl = 'api/auth'; // Base API URL for authentication
 
-  constructor() {
+  constructor(private http: HttpClient) {
     this.initializeMockUsers();
     this.checkExistingSession();
   }
