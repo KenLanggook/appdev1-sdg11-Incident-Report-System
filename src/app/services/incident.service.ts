@@ -115,7 +115,7 @@ export class IncidentService {
   }
 
   getIncidents(): Observable<Incident[]> {
-    return this.incidentsSubject.asObservable();
+    return this.http.get<Incident[]>(this.apiUrl);
   }
 
   getIncidentById(id: string): Observable<Incident | undefined> {
