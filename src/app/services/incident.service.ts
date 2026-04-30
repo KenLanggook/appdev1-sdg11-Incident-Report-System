@@ -145,18 +145,8 @@ export class IncidentService {
            longitude <= CAMPUS_BOUNDS.northeast[1];
   }
 
-  updateIncident(id: string, updates: Partial<Incident>): Observable<boolean> {
-    const index = this.incidents.findIndex(i => i.id === id);
-    if (index !== -1) {
-      this.incidents[index] = {
-        ...this.incidents[index],
-        ...updates,
-        updatedAt: new Date()
-      };
-      this.incidentsSubject.next(this.incidents);
-      return of(true);
-    }
-    return of(false);
+  updateIncident(id: string, updates: Partial<Incident>): Observable<Incident> {
+    return this.http.put<Incident>(`${this.apiUrl}/${id}`, updates);
   }
 
   deleteIncident(id: string): Observable<boolean> {
