@@ -80,22 +80,8 @@ export class AuthService {
     }
   }
 
-  login(username: string, password: string): Observable<boolean> {
-    const user = this.users.find(u => 
-      u.username === username && 
-      u.password === password && 
-      u.isActive
-    );
-
-    if (user) {
-      user.lastLogin = new Date();
-      this.currentUserSubject.next(user);
-      this.isAuthenticatedSubject.next(true);
-      localStorage.setItem('currentUser', JSON.stringify(user));
-      return of(true);
-    }
-
-    return of(false);
+  login(username: string, password: string): Observable<User> {
+    return this.http.post<User>(`${this.apiUrl}/login`, { username, password });
   }
 
   logout(): void {
