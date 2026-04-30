@@ -149,14 +149,8 @@ export class IncidentService {
     return this.http.put<Incident>(`${this.apiUrl}/${id}`, updates);
   }
 
-  deleteIncident(id: string): Observable<boolean> {
-    const index = this.incidents.findIndex(i => i.id === id);
-    if (index !== -1) {
-      this.incidents.splice(index, 1);
-      this.incidentsSubject.next(this.incidents);
-      return of(true);
-    }
-    return of(false);
+  deleteIncident(id: string): Observable<void> {
+    return this.http.delete<void>(`${this.apiUrl}/${id}`);
   }
 
   getIncidentsByCategory(category: IncidentCategory): Observable<Incident[]> {
