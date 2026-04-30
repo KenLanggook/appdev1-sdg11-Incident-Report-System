@@ -154,8 +154,7 @@ export class IncidentService {
   }
 
   getIncidentsByCategory(category: IncidentCategory): Observable<Incident[]> {
-    const filtered = this.incidents.filter(i => i.category === category);
-    return of(filtered);
+    return this.http.get<Incident[]>(`${this.apiUrl}?category=${category}`);
   }
 
   getIncidentsByStatus(status: IncidentStatus): Observable<Incident[]> {
