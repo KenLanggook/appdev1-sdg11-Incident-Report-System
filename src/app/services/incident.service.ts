@@ -1,4 +1,5 @@
 import { Injectable } from '@angular/core';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { BehaviorSubject, Observable, of } from 'rxjs';
 import { 
   Incident, 
@@ -17,8 +18,15 @@ import {
 export class IncidentService {
   private incidents: Incident[] = [];
   private incidentsSubject = new BehaviorSubject<Incident[]>([]);
+  private apiUrl = 'api/incidents'; // Base API URL for incidents
+  private httpOptions = {
+    headers: new HttpHeaders({
+      'Content-Type': 'application/json',
+      'Access-Control-Allow-Origin': '*'
+    })
+  };
 
-  constructor() {
+  constructor(private http: HttpClient) {
     this.initializeMockIncidents();
   }
 
@@ -115,7 +123,7 @@ export class IncidentService {
   }
 
   getIncidents(): Observable<Incident[]> {
-    return this.http.get<Incident[]>(this.apiUrl);
+    return this.http.get<Incident[]>(this.apiUrl, this.httpOptions);
   }
 
   getIncidentById(id: string): Observable<Incident> {
