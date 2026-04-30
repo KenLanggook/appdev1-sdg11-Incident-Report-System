@@ -158,8 +158,7 @@ export class IncidentService {
   }
 
   getIncidentsByStatus(status: IncidentStatus): Observable<Incident[]> {
-    const filtered = this.incidents.filter(i => i.status === status);
-    return of(filtered);
+    return this.http.get<Incident[]>(`${this.apiUrl}?status=${status}`);
   }
 
   getIncidentsByReporter(reporterId: string): Observable<Incident[]> {
