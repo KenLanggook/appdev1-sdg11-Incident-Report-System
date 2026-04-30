@@ -118,9 +118,8 @@ export class IncidentService {
     return this.http.get<Incident[]>(this.apiUrl);
   }
 
-  getIncidentById(id: string): Observable<Incident | undefined> {
-    const incident = this.incidents.find(i => i.id === id);
-    return of(incident);
+  getIncidentById(id: string): Observable<Incident> {
+    return this.http.get<Incident>(`${this.apiUrl}/${id}`);
   }
 
   createIncident(incidentData: Omit<Incident, 'id' | 'reportedAt' | 'updatedAt'>): Observable<Incident | null> {
