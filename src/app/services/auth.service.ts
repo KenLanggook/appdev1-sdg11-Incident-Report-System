@@ -99,36 +99,8 @@ export class AuthService {
     phone?: string;
     studentId?: string;
     department?: string;
-  }): Observable<boolean> {
-    // Check if username or email already exists
-    const existingUser = this.users.find(u => 
-      u.username === userData.username || 
-      u.email === userData.email
-    );
-
-    if (existingUser) {
-      return of(false);
-    }
-
-    const newUser: User = {
-      id: (this.users.length + 1).toString(),
-      username: userData.username,
-      email: userData.email,
-      password: userData.password,
-      role: UserRole.USER,
-      profile: {
-        firstName: userData.firstName,
-        lastName: userData.lastName,
-        phone: userData.phone,
-        studentId: userData.studentId,
-        department: userData.department
-      },
-      createdAt: new Date(),
-      isActive: true
-    };
-
-    this.users.push(newUser);
-    return of(true);
+  }): Observable<User> {
+    return this.http.post<User>(`${this.apiUrl}/register`, userData);
   }
 
   getCurrentUser(): Observable<User | null> {
