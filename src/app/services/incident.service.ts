@@ -1,5 +1,7 @@
 import { Injectable } from '@angular/core';
-import { BehaviorSubject, Observable, of } from 'rxjs';
+import { HttpClient } from '@angular/common/http';
+import { BehaviorSubject, Observable, of, throwError } from 'rxjs';
+import { catchError, tap } from 'rxjs/operators';
 import { 
   Incident, 
   IncidentCategory, 
@@ -17,8 +19,9 @@ import {
 export class IncidentService {
   private incidents: Incident[] = [];
   private incidentsSubject = new BehaviorSubject<Incident[]>([]);
+  private readonly API_URL = 'api/incidents'; // This will use the proxy configuration
 
-  constructor() {
+  constructor(private http: HttpClient) {
     this.initializeMockIncidents();
   }
 
@@ -115,7 +118,17 @@ export class IncidentService {
   }
 
   getIncidents(): Observable<Incident[]> {
-    return this.incidentsSubject.asObservable();
+    // Try to get data from API first, fallback to mock data
+    return this.http.get<Incident[]>(this.API_URL).pipe(
+      tap(incidents => {
+        this.incidents = incidents;
+        this.incidentsSubject.next(incidents);
+      }),
+      catchError(error => {
+        console.warn('API not available, using mock data:', error);
+        return this.incidentsSubject.asObservable();
+      })
+    );
   }
 
   getIncidentById(id: string): Observable<Incident | undefined> {
@@ -130,16 +143,27 @@ export class IncidentService {
       return of(null);
     }
 
-    const newIncident: Incident = {
-      ...incidentData,
-      id: (this.incidents.length + 1).toString(),
-      reportedAt: new Date(),
-      updatedAt: new Date()
-    };
+    // Try API first, fallback to mock
+    return this.http.post<Incident>(this.API_URL, incidentData).pipe(
+      tap(newIncident => {
+        this.incidents.push(newIncident);
+        this.incidentsSubject.next(this.incidents);
+      }),
+      catchError(error => {
+        console.warn('API not available, using mock data:', error);
+        // Fallback to mock implementation
+        const newIncident: Incident = {
+          ...incidentData,
+          id: (this.incidents.length + 1).toString(),
+          reportedAt: new Date(),
+          updatedAt: new Date()
+        };
 
-    this.incidents.push(newIncident);
-    this.incidentsSubject.next(this.incidents);
-    return of(newIncident);
+        this.incidents.push(newIncident);
+        this.incidentsSubject.next(this.incidents);
+        return of(newIncident);
+      })
+    );
   }
 
   private isWithinCampusBounds(latitude: number, longitude: number): boolean {
@@ -156,27 +180,59 @@ export class IncidentService {
   }
 
   updateIncident(id: string, updates: Partial<Incident>): Observable<boolean> {
-    const index = this.incidents.findIndex(i => i.id === id);
-    if (index !== -1) {
-      this.incidents[index] = {
-        ...this.incidents[index],
-        ...updates,
-        updatedAt: new Date()
-      };
-      this.incidentsSubject.next(this.incidents);
-      return of(true);
-    }
-    return of(false);
+    // Try API first, fallback to mock
+    return this.http.put<boolean>(`${this.API_URL}/${id}`, updates).pipe(
+      tap(() => {
+        const index = this.incidents.findIndex(i => i.id === id);
+        if (index !== -1) {
+          this.incidents[index] = {
+            ...this.incidents[index],
+            ...updates,
+            updatedAt: new Date()
+          };
+          this.incidentsSubject.next(this.incidents);
+        }
+      }),
+      catchError(error => {
+        console.warn('API not available, using mock data:', error);
+        // Fallback to mock implementation
+        const index = this.incidents.findIndex(i => i.id === id);
+        if (index !== -1) {
+          this.incidents[index] = {
+            ...this.incidents[index],
+            ...updates,
+            updatedAt: new Date()
+          };
+          this.incidentsSubject.next(this.incidents);
+          return of(true);
+        }
+        return of(false);
+      })
+    );
   }
 
   deleteIncident(id: string): Observable<boolean> {
-    const index = this.incidents.findIndex(i => i.id === id);
-    if (index !== -1) {
-      this.incidents.splice(index, 1);
-      this.incidentsSubject.next(this.incidents);
-      return of(true);
-    }
-    return of(false);
+    // Try API first, fallback to mock
+    return this.http.delete<boolean>(`${this.API_URL}/${id}`).pipe(
+      tap(() => {
+        const index = this.incidents.findIndex(i => i.id === id);
+        if (index !== -1) {
+          this.incidents.splice(index, 1);
+          this.incidentsSubject.next(this.incidents);
+        }
+      }),
+      catchError(error => {
+        console.warn('API not available, using mock data:', error);
+        // Fallback to mock implementation
+        const index = this.incidents.findIndex(i => i.id === id);
+        if (index !== -1) {
+          this.incidents.splice(index, 1);
+          this.incidentsSubject.next(this.incidents);
+          return of(true);
+        }
+        return of(false);
+      })
+    );
   }
 
   getIncidentsByCategory(category: IncidentCategory): Observable<Incident[]> {
