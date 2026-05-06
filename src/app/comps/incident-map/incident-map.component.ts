@@ -43,9 +43,13 @@ export class IncidentMapComponent implements OnInit, AfterViewInit {
   }
 
   ngAfterViewInit() {
+<<<<<<< HEAD
     setTimeout(() => {
       this.initializeMap();
     }, 0);
+=======
+    this.initializeMap();
+>>>>>>> 54d57371d7e07b666eb9d8040b9700021cbd302b
   }
 
   private checkAuthStatus() {

@@ -80,6 +80,7 @@ export class AuthService {
     }
   }
 
+<<<<<<< HEAD
   login(username: string, password: string): Observable<boolean> {
     // Mock authentication using existing users
     const user = this.users.find(u => 
@@ -97,6 +98,10 @@ export class AuthService {
     }
     
     return of(false);
+=======
+  login(username: string, password: string): Observable<User> {
+    return this.http.post<User>(`${this.apiUrl}/login`, { username, password });
+>>>>>>> 54d57371d7e07b666eb9d8040b9700021cbd302b
   }
 
   logout(): void {
@@ -114,6 +119,7 @@ export class AuthService {
     phone?: string;
     studentId?: string;
     department?: string;
+<<<<<<< HEAD
   }): Observable<boolean> {
     // Check if username or email already exists
     const existingUser = this.users.find(u => 
@@ -145,6 +151,10 @@ export class AuthService {
     
     this.users.push(newUser);
     return of(true);
+=======
+  }): Observable<User> {
+    return this.http.post<User>(`${this.apiUrl}/register`, userData);
+>>>>>>> 54d57371d7e07b666eb9d8040b9700021cbd302b
   }
 
   getCurrentUser(): Observable<User | null> {

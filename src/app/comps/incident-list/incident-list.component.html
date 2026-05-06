@@ -13,7 +13,10 @@
           type="text" 
           id="search" 
           [(ngModel)]="searchTerm" 
+<<<<<<< HEAD
           name="search"
+=======
+>>>>>>> 54d57371d7e07b666eb9d8040b9700021cbd302b
           (input)="onFilterChange()"
           placeholder="Search incidents..."
         >
@@ -21,7 +24,11 @@
       
       <div class="filter-group">
         <label for="status">Status:</label>
+<<<<<<< HEAD
         <select id="status" [(ngModel)]="statusFilter" name="statusFilter" (change)="onFilterChange()">
+=======
+        <select id="status" [(ngModel)]="statusFilter" (change)="onFilterChange()">
+>>>>>>> 54d57371d7e07b666eb9d8040b9700021cbd302b
           <option value="">All Statuses</option>
           <option *ngFor="let status of statuses" [value]="status">
             {{ status.replace('_', ' ').toUpperCase() }}
@@ -31,7 +38,11 @@
       
       <div class="filter-group">
         <label for="severity">Severity:</label>
+<<<<<<< HEAD
         <select id="severity" [(ngModel)]="severityFilter" name="severityFilter" (change)="onFilterChange()">
+=======
+        <select id="severity" [(ngModel)]="severityFilter" (change)="onFilterChange()">
+>>>>>>> 54d57371d7e07b666eb9d8040b9700021cbd302b
           <option value="">All Severities</option>
           <option *ngFor="let severity of severities" [value]="severity">
             {{ severity.toUpperCase() }}

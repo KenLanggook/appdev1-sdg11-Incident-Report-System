@@ -123,6 +123,7 @@ export class IncidentService {
   }
 
   getIncidents(): Observable<Incident[]> {
+<<<<<<< HEAD
     return of(this.incidents);
   }
 
@@ -132,6 +133,13 @@ export class IncidentService {
       throw new Error(`Incident with ID ${id} not found`);
     }
     return of(incident);
+=======
+    return this.http.get<Incident[]>(this.apiUrl, this.httpOptions);
+  }
+
+  getIncidentById(id: string): Observable<Incident> {
+    return this.http.get<Incident>(`${this.apiUrl}/${id}`);
+>>>>>>> 54d57371d7e07b666eb9d8040b9700021cbd302b
   }
 
   createIncident(incidentData: Omit<Incident, 'id' | 'reportedAt' | 'updatedAt'>): Observable<Incident> {
@@ -141,6 +149,7 @@ export class IncidentService {
       throw new Error('Incident location is outside University of Baguio campus boundaries');
     }
 
+<<<<<<< HEAD
     const newIncident: Incident = {
       ...incidentData,
       id: (this.incidents.length + 1).toString(),
@@ -151,6 +160,9 @@ export class IncidentService {
     this.incidents.push(newIncident);
     this.incidentsSubject.next(this.incidents);
     return of(newIncident);
+=======
+    return this.http.post<Incident>(this.apiUrl, incidentData);
+>>>>>>> 54d57371d7e07b666eb9d8040b9700021cbd302b
   }
 
   private isWithinCampusBounds(latitude: number, longitude: number): boolean {
@@ -167,6 +179,7 @@ export class IncidentService {
   }
 
   updateIncident(id: string, updates: Partial<Incident>): Observable<Incident> {
+<<<<<<< HEAD
     const incidentIndex = this.incidents.findIndex(i => i.id === id);
     if (incidentIndex === -1) {
       throw new Error(`Incident with ID ${id} not found`);
@@ -206,6 +219,25 @@ export class IncidentService {
   getIncidentsByReporter(reporterId: string): Observable<Incident[]> {
     const filteredIncidents = this.incidents.filter(i => i.reportedBy === reporterId);
     return of(filteredIncidents);
+=======
+    return this.http.put<Incident>(`${this.apiUrl}/${id}`, updates);
+  }
+
+  deleteIncident(id: string): Observable<void> {
+    return this.http.delete<void>(`${this.apiUrl}/${id}`);
+  }
+
+  getIncidentsByCategory(category: IncidentCategory): Observable<Incident[]> {
+    return this.http.get<Incident[]>(`${this.apiUrl}?category=${category}`);
+  }
+
+  getIncidentsByStatus(status: IncidentStatus): Observable<Incident[]> {
+    return this.http.get<Incident[]>(`${this.apiUrl}?status=${status}`);
+  }
+
+  getIncidentsByReporter(reporterId: string): Observable<Incident[]> {
+    return this.http.get<Incident[]>(`${this.apiUrl}?reporter=${reporterId}`);
+>>>>>>> 54d57371d7e07b666eb9d8040b9700021cbd302b
   }
 
   getMapMarkers(): Observable<MapMarker[]> {
@@ -293,6 +325,7 @@ export class IncidentService {
   }
 
   searchIncidents(query: string): Observable<Incident[]> {
+<<<<<<< HEAD
     const searchLower = query.toLowerCase();
     const filteredIncidents = this.incidents.filter(i => 
       i.title.toLowerCase().includes(searchLower) ||
@@ -300,5 +333,8 @@ export class IncidentService {
       i.location.address.toLowerCase().includes(searchLower)
     );
     return of(filteredIncidents);
+=======
+    return this.http.get<Incident[]>(`${this.apiUrl}?search=${query}`);
+>>>>>>> 54d57371d7e07b666eb9d8040b9700021cbd302b
   }
 }

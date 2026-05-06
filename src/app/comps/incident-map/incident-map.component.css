@@ -42,7 +42,10 @@
   flex-direction: column;
   gap: 8px;
   z-index: 1000;
+<<<<<<< HEAD
   max-width: 200px;
+=======
+>>>>>>> 54d57371d7e07b666eb9d8040b9700021cbd302b
 }
 
 .map-control-btn {
@@ -58,9 +61,12 @@
   font-weight: 500;
   box-shadow: 0 2px 4px rgba(0,0,0,0.1);
   transition: all 0.2s;
+<<<<<<< HEAD
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
+=======
+>>>>>>> 54d57371d7e07b666eb9d8040b9700021cbd302b
 }
 
 .map-control-btn:hover {
@@ -118,6 +124,7 @@
   top: 10px;
   right: 10px;
   background: white;
+<<<<<<< HEAD
   padding: 12px;
   border-radius: 8px;
   box-shadow: 0 2px 10px rgba(0,0,0,0.2);
@@ -131,14 +138,31 @@
   font-size: 0.85em;
   color: #333;
   white-space: nowrap;
+=======
+  padding: 15px;
+  border-radius: 8px;
+  box-shadow: 0 2px 10px rgba(0,0,0,0.2);
+  z-index: 1000;
+}
+
+.map-legend h4 {
+  margin: 0 0 10px 0;
+  font-size: 0.9em;
+  color: #333;
+>>>>>>> 54d57371d7e07b666eb9d8040b9700021cbd302b
 }
 
 .legend-item {
   display: flex;
   align-items: center;
+<<<<<<< HEAD
   gap: 6px;
   margin-bottom: 4px;
   font-size: 0.8em;
+=======
+  gap: 8px;
+  margin-bottom: 5px;
+>>>>>>> 54d57371d7e07b666eb9d8040b9700021cbd302b
 }
 
 .legend-marker {
